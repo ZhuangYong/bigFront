@@ -1,0 +1,4 @@
+rootProject.name = 'bigFront'
+include 'auth'
+include 'common-resources'
+

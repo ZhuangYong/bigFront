@@ -1,0 +1,7 @@
+*/build/
+*/jrebel/
+/.gradle/
+/.vertx/
+/my_log.log
+/gradle/
+/.idea/

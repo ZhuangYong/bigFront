@@ -1,0 +1,55 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+    group 'JMAKE'
+    version = '1.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    idea {
+        module {
+            downloadJavadoc = false
+            downloadSources = false
+        }
+    }
+}
+
+subprojects {
+    ext {
+        slf4jVersion = '1.7.7'
+    }
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    repositories {
+        mavenCentral()
+    }
+    configurations {
+        // compile.exclude module: 'commons-logging'
+        // all*.exclude module: 'commons-logging'
+    }
+    dependencies {
+        compile(
+                'redis.clients:jedis:2.9.0',
+                "org.slf4j:slf4j-api:$slf4jVersion",
+                'ch.qos.logback:logback-core:1.1.11',
+                'ch.qos.logback:logback-classic:1.1.11',
+                'io.vertx:vertx-core:3.2.1',
+                'io.vertx:vertx-web:3.2.1',
+                'io.vertx:vertx-web-templ-mvel:3.2.1',
+                'io.vertx:vertx-auth-oauth2:3.5.1',
+                'com.github.jknack:handlebars:4.0.5',
+                'org.apache.directory.studio:org.apache.commons.io:2.4',
+                'com.github.jknack:handlebars-jackson2:4.0.5',
+                'org.aspectj:aspectjweaver:1.8.9',
+                'org.reflections:reflections:0.9.10'
+        )
+        compile('io.vertx:vertx-web-templ-handlebars:3.2.1') {
+            exclude group: 'com.github.jknack'
+        }
+        compile(fileTree(dir: "${rootProject.projectDir}/lib", include: '*.jar'))
+        testCompile(
+                "junit:junit:4.12"
+        )
+    }
+}
+

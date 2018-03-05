@@ -1,0 +1,27 @@
+group 'JMAKE'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+ext{
+    springFrameworkVersion = '4.2.1.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            "org.springframework:spring-test:$springFrameworkVersion",
+            "org.springframework:spring-context:$springFrameworkVersion",
+            "org.springframework:spring-core:$springFrameworkVersion",
+            "org.springframework:spring-beans:$springFrameworkVersion",
+            "org.springframework:spring-aop:$springFrameworkVersion",
+            "org.springframework:spring-jdbc:$springFrameworkVersion",
+            "org.springframework:spring-context-support:$springFrameworkVersion",
+            "org.springframework.data:spring-data-redis:1.6.1.RELEASE",
+    )
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
